@@ -106,6 +106,10 @@ export class TinyKv<
     clearInterval(this.#activeExStrategyIntervalId);
   }
 
+  public size() {
+    return this.#storage.size;
+  }
+
   /*
   public on(hookName: HookName, callback: HookCallback) {
     this.#hooks.set(hookName, callback);
@@ -129,7 +133,7 @@ export class TinyKv<
     const sample = buildMapSample(this.#exMap);
     let hitCount = 0;
     sample.forEach((timestamp, key) => {
-      if (currentTimestamp <= timestamp) {
+      if (currentTimestamp > timestamp) {
         hitCount++;
         this.#storage.delete(key);
         this.#exMap.delete(key);
