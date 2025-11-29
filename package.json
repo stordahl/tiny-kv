@@ -1,0 +1,17 @@
+{
+  "name": "tiny-kv",
+  "module": "tiny-kv.ts",
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@standard-schema/spec": "^1.0.0"
+  }
+}
