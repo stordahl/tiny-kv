@@ -1,8 +1,10 @@
 # TinyKv
 
+> For when you need more than a Map, and less than Redis.
+
 [![JSR](https://jsr.io/badges/@stordahl/tiny-kv)](https://jsr.io/@stordahl/tiny-kv)
 
-A tiny in-memory key-value store with schema validation and TTL support for TypeScript/JavaScript applications.
+TinyKv is a tiny in-memory key-value store with schema validation and TTL support for TypeScript/JavaScript applications.
 
 ## Overview
 
