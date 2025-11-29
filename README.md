@@ -1,5 +1,7 @@
 # TinyKv
 
+[![JSR](https://jsr.io/badges/@stordahl/tiny-kv)](https://jsr.io/@stordahl/tiny-kv)
+
 A tiny in-memory key-value store with schema validation and TTL support for TypeScript/JavaScript applications.
 
 ## Overview
@@ -47,3 +49,13 @@ kv.size();             // Get storage size
 kv.cleanup();          // Clear all data and stop cleanup
 ```
 
+## Installation
+
+TinyKv is published to JSR under my personal scope.
+
+```shell
+npx jsr add @stordahl/tiny-kv  # npm
+pnpm i jsr:@stordahl/tiny-kv   # pnpm
+deno add jsr:@stordahl/tiny-kv # deno
+bunx jsr add @stordahl/tiny-kv # bun
+```
