@@ -49,7 +49,7 @@ export class TinyKv<
     }, 1000)
   }
 
-  public get(key: InferKey<KSchema>) {
+  public get(key: InferKey<KSchema>): InferValue<VSchema> | null {
     if (this.isExpired(key)) {
       this.delete(key);
       return null 
@@ -57,7 +57,7 @@ export class TinyKv<
     return this.#storage.get(key) ?? null; 
   }
 
-  public async set(key: InferKey<KSchema>, value: InferValue<VSchema>, opts?: { ex: number; }) {
+  public async set(key: InferKey<KSchema>, value: InferValue<VSchema>, opts?: { ex: number; }): Promise<TinyKv<KSchema, VSchema>> {
     let finalKey: InferKey<KSchema> = key;
     let finalValue: InferValue<VSchema> = value;
     if (this.keySchema) {
@@ -71,13 +71,13 @@ export class TinyKv<
     return this;
   }
 
-  public delete(key: InferKey<KSchema>) {
+  public delete(key: InferKey<KSchema>): TinyKv<KSchema, VSchema> {
     this.#storage.delete(key); 
     this.#exMap.delete(key);
     return this;
   }
 
-  public exists(key: InferKey<KSchema>) {
+  public exists(key: InferKey<KSchema>): boolean {
     if (this.isExpired(key)) {
       this.delete(key);
       return false 
@@ -85,14 +85,14 @@ export class TinyKv<
     return this.#storage.has(key); 
   }
 
-  public isExpired(key: InferKey<KSchema>) {
+  public isExpired(key: InferKey<KSchema>): boolean | undefined {
     if (!this.#exMap.has(key)) {
       return undefined;
     } 
     return (Date.now() > this.#exMap.get(key)!);
   }
 
-  public getExpiration(key: InferKey<KSchema>) {
+  public getExpiration(key: InferKey<KSchema>): number | undefined {
     if (!this.#exMap.has(key)) {
       console.error(`Key ${key} does not have an expiration set`)
       return undefined;
@@ -100,13 +100,13 @@ export class TinyKv<
     return this.#exMap.get(key);
   }
 
-  public cleanup() {
+  public cleanup(): void {
     this.#storage.clear();
     this.#exMap.clear()
     clearInterval(this.#activeExStrategyIntervalId);
   }
 
-  public size() {
+  public size(): number {
     return this.#storage.size;
   }
 
